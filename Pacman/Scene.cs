@@ -34,6 +34,8 @@ namespace Pacman
 
         public void UpdateAll(float deltaTime)
         {
+            
+            
             Loader.HandleSceneLoad(this);
         }
 
