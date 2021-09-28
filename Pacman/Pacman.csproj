@@ -25,7 +25,7 @@
 
   <ItemGroup>
     <None Remove="assets/*.ttf" />
-    <EmbeddedResource Include="assets/*.png">
+    <EmbeddedResource Include="assets/*.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

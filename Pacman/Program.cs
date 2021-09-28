@@ -10,23 +10,30 @@ namespace Pacman
         static void Main(string[] args)
         {
             
-            using (var window = new RenderWindow(new VideoMode(828, 900), "Platformer")) 
+            using (var window = new RenderWindow(new VideoMode(828, 900), "Pacman")) 
             {
                 window.Closed += (o, e) => window.Close();
-
+                
+                Scene scene = new Scene();
+                scene.Loader.Load("maze");
                 Clock clock = new Clock();
                 while (window.IsOpen)
                 {
+                    
                     window.DispatchEvents();
 
                     float deltaTime = clock.Restart().AsSeconds();
                     
-                    window.Clear();
-                    // TODO:  Drawing
+                    scene.UpdateAll(deltaTime);
                     
+                    window.Clear(new Color(223, 246, 245));
+                    // TODO:  Drawing
+                    scene.RenderAll(window);
                     window.Display();
                 }
             }
+
+            
         }
     }
 }
