@@ -47,8 +47,9 @@ namespace Pacman
                     Entity created;
                     if(!Create(row[j], out created)) continue;
                     
+                    scene.Spawn(created);
                     
-                    created.Position = new Vector2f((i + 1) * 18, (j + 1) * 18);
+                    created.Position = new Vector2f((j + 1) * 18, (i + 1) * 18);
 
                 }
             }

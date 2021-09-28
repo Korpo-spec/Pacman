@@ -13,11 +13,13 @@ namespace Pacman
         {
             entities = new List<Entity>();
             Loader = new SceneLoader();
+            Assets = new Assetmanager();
         }
 
         public void Spawn(Entity entity)
         {
-            
+            entities.Add(entity);
+            entity.Create(this);
         }
 
         public void Clear()
