@@ -13,5 +13,14 @@ namespace Pacman
             sprite.TextureRect = new IntRect(72, 54, 18, 18);
             base.Create(scene);
         }
+
+        protected override void CollideWith(Scene scene, Entity other)
+        {
+            if (other is Pacman)
+            {
+                Dead = true;
+                scene.PublishCandyEaten();
+            }
+        }
     }
 }

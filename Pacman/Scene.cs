@@ -5,11 +5,14 @@ using SFML.Graphics;
 namespace Pacman
 {
     public delegate void ValueChangedEvent(Scene scene, int value);
+
+    public delegate void ValueIncremented();
     
     public sealed class Scene
     {
         public event ValueChangedEvent GainScore;
         public event ValueChangedEvent LoseHealth;
+        public event ValueIncremented CandyEaten;
         
         private List<Entity> entities;
         public readonly SceneLoader Loader;
@@ -24,8 +27,10 @@ namespace Pacman
 
         private int scoreGained;
         private int healthLost;
+        private int candiesEaten;
         public void PublishGainedScore(int amount) => scoreGained += amount;
         public void PublishLoseHealth(int amount) => healthLost += amount;
+        public void PublishCandyEaten() => candiesEaten++;
 
         public void Spawn(Entity entity)
         {
@@ -38,8 +43,12 @@ namespace Pacman
             for (int i = entities.Count - 1; i >= 0; i--)
             {
                 Entity entity = entities[i];
-                entities.RemoveAt(i);
-                entity.Destroy(this);
+                if (!entity.DontDestroyOnLoad)
+                {
+                    entities.RemoveAt(i);
+                    entity.Destroy(this);
+                }
+                
             }
         }
 
@@ -66,6 +75,11 @@ namespace Pacman
             {
                 LoseHealth?.Invoke(this,healthLost);
                 healthLost = 0;
+            }
+            if (candiesEaten != 0)
+            {
+                CandyEaten?.Invoke();
+                candiesEaten = 0;
             }
             for (int i = 0; i < entities.Count;)
             {
@@ -99,6 +113,21 @@ namespace Pacman
                 }
 
             }
+        }
+        
+        public bool FindByType<T>(out T found) where T : Entity
+        {
+            foreach (Entity entity in entities)
+            {
+                if (entity is T typed)
+                {
+                    found = typed;
+                    return true;
+                }
+            }
+            
+            found = default(T);
+            return false;
         }
     }
 }

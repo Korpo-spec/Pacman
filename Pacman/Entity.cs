@@ -8,6 +8,7 @@ namespace Pacman
         private string textureName = "";
         protected Sprite sprite;
         public bool Dead;
+        public bool DontDestroyOnLoad;
 
         public Entity(string textureName)
         {

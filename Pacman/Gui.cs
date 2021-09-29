@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using System;
+using SFML.Graphics;
 using SFML.System;
 
 namespace Pacman
@@ -22,6 +23,8 @@ namespace Pacman
             scoreText.DisplayedString = $"Score: {currentScore}";
             scoreText.FillColor = Color.Black;
             currentHealth = maxHealth;
+            scene.LoseHealth += OnLoseHealth;
+            scene.GainScore += OnGainScore;
             base.Create(scene);
         }
 
@@ -36,9 +39,36 @@ namespace Pacman
                 base.Render(target);
                 sprite.Position += new Vector2f(18, 0);
             }
+            scoreText.DisplayedString = $"Score: {currentScore}";
 
             scoreText.Position = new Vector2f(414 - scoreText.GetGlobalBounds().Width, 396);
             target.Draw(scoreText);
         }
+
+        private void OnLoseHealth(Scene scene, int amount)
+        {
+            currentHealth -= amount;
+            if (currentHealth <= 0)
+            {
+                DontDestroyOnLoad = false;
+                scene.Loader.Reload();
+            }
+        }
+
+        private void OnGainScore(Scene scene, int amount)
+        {
+            
+            currentScore += amount;
+            if (!scene.FindByType<Coin>(out _))
+            {
+                
+                DontDestroyOnLoad = true;
+                scene.Loader.Reload();
+            }
+            
+
+        }
+        
+        
     }
 }
