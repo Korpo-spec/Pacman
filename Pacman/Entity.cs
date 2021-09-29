@@ -21,13 +21,10 @@ namespace Pacman
             set => sprite.Position = value;
         }
 
-        public virtual FloatRect Bounds
-        {
-            get;
-            set;
-        }
+        public virtual FloatRect Bounds => sprite.GetGlobalBounds();
+        
 
-        public virtual bool Solid { get; }
+        public virtual bool Solid => false;
 
 
         public virtual void Create(Scene scene)
