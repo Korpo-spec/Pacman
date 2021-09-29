@@ -37,6 +37,11 @@ namespace Pacman
             
             
             Loader.HandleSceneLoad(this);
+
+            foreach (Entity entity in entities)
+            {
+                entity.Update(this, deltaTime);
+            }
         }
 
         public void RenderAll(RenderTarget target)

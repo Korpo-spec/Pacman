@@ -19,6 +19,37 @@ namespace Pacman
 
         }
 
+        public override void Update(Scene scene, float deltaTime)
+        {
+            base.Update(scene, deltaTime);
+            if (IsAlligned)
+            {
+                if (!wasAligned)
+                {
+                    direction = PickDirection(scene);
+                }
+
+                if (moving)
+                {
+                    wasAligned = true;
+                }
+            }
+            else
+            {
+                wasAligned = false;
+            }
+
+            if (!moving) return;
+            Position += ToVector(direction) * (speed * deltaTime);
+            Position = MathF.Floor(Position.X) switch
+            {
+                < 0 => new Vector2f(432, Position.Y),
+                > 432 => new Vector2f(0, Position.Y),
+                _ => Position
+            };
+
+        }
+
         public override void Create(Scene scene)
         {
             base.Create(scene);
@@ -52,6 +83,8 @@ namespace Pacman
                     return new Vector2f(0, 1); // down
                 
             }
+
+            return new Vector2f(0,0);
         }
 
         protected virtual int PickDirection(Scene scene)

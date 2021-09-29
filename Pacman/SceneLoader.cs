@@ -15,7 +15,8 @@ namespace Pacman
         {
             loaders = new Dictionary<char, Func<Entity>>()
             {
-                {'#', () => new Wall()}
+                {'#', () => new Wall()},
+                {'g', () => new Ghost()}
             };
         }
 
@@ -49,7 +50,7 @@ namespace Pacman
                     
                     scene.Spawn(created);
                     
-                    created.Position = new Vector2f((j + 1) * 18, (i + 1) * 18);
+                    created.Position = new Vector2f((j) * 18, (i) * 18);
 
                 }
             }

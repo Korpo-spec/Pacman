@@ -17,7 +17,7 @@ namespace Pacman
                 Scene scene = new Scene();
                 scene.Loader.Load("maze");
                 Clock clock = new Clock();
-                window.SetView(new View(new FloatRect(18,0,450,450)));
+                window.SetView(new View(new FloatRect(18,0,414,450)));
                 while (window.IsOpen)
                 {
                     
