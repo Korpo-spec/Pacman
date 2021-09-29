@@ -16,7 +16,11 @@ namespace Pacman
             loaders = new Dictionary<char, Func<Entity>>()
             {
                 {'#', () => new Wall()},
-                {'g', () => new Ghost()}
+                {'g', () => new Ghost()},
+                {'p', () => new Pacman()},
+                {'.', () => new Coin()},
+                {'c', () => new Candy()}
+                
             };
         }
 
@@ -47,16 +51,17 @@ namespace Pacman
                 {
                     Entity created;
                     if(!Create(row[j], out created)) continue;
-                    
+                    created.Position = new Vector2f((j) * 18, (i) * 18);
                     scene.Spawn(created);
                     
-                    created.Position = new Vector2f((j) * 18, (i) * 18);
+                    
 
                 }
             }
             
             currentScene = nextScene;
             nextScene = "";
+            scene.Spawn(new Gui());
         }
 
         public void Load(string scene) => nextScene = scene;
