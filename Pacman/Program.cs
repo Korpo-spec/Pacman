@@ -2,6 +2,7 @@
 using SFML.System;
 using SFML.Graphics;
 using SFML.Window;
+using System.IO;
 
 namespace Pacman
 {
@@ -13,7 +14,7 @@ namespace Pacman
             using (var window = new RenderWindow(new VideoMode(828, 900), "Pacman")) 
             {
                 window.Closed += (o, e) => window.Close();
-                
+                File.Open("highscore.txt", FileMode.OpenOrCreate);
                 Scene scene = new Scene();
                 scene.Loader.Load("maze");
                 Clock clock = new Clock();
