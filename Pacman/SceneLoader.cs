@@ -61,7 +61,8 @@ namespace Pacman
             
             currentScene = nextScene;
             nextScene = "";
-            scene.Spawn(new Gui());
+            if(!scene.FindByType<Gui>(out _)) scene.Spawn(new Gui());
+            
         }
 
         public void Load(string scene) => nextScene = scene;

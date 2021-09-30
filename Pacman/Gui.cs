@@ -23,8 +23,8 @@ namespace Pacman
             scoreText.DisplayedString = $"Score: {currentScore}";
             scoreText.FillColor = Color.Black;
             currentHealth = maxHealth;
-            scene.LoseHealth += OnLoseHealth;
-            scene.GainScore += OnGainScore;
+            scene.Events.LoseHealth += OnLoseHealth;
+            scene.Events.GainScore += OnGainScore;
             base.Create(scene);
         }
 

@@ -12,7 +12,7 @@ namespace Pacman
             direction = -1;
             speed = 100.0f;
             moving = true;
-            scene.CandyEaten += () => frozenTimer = 200;
+            scene.Events.CandyEaten += () => frozenTimer = 200;
             base.Create(scene);
             sprite.TextureRect = new IntRect(36, 0, 18, 18);
             originalPosition = Position;
@@ -24,7 +24,7 @@ namespace Pacman
             {
                 if (frozenTimer <= 0)
                 {
-                    scene.PublishLoseHealth(1);
+                    scene.Events.PublishLoseHealth(1);
                     
                 }
                 Position = originalPosition;

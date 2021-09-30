@@ -19,7 +19,7 @@ namespace Pacman
             if (other is Pacman)
             {
                 Dead = true;
-                scene.PublishCandyEaten();
+                scene.Events.PublishCandyEaten();
             }
         }
     }

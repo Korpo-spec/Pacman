@@ -4,33 +4,25 @@ using SFML.Graphics;
 
 namespace Pacman
 {
-    public delegate void ValueChangedEvent(Scene scene, int value);
-
-    public delegate void ValueIncremented();
+    
     
     public sealed class Scene
     {
-        public event ValueChangedEvent GainScore;
-        public event ValueChangedEvent LoseHealth;
-        public event ValueIncremented CandyEaten;
+      
         
         private List<Entity> entities;
         public readonly SceneLoader Loader;
         public readonly Assetmanager Assets;
-
+        public readonly EventManager Events;
         public Scene()
         {
             entities = new List<Entity>();
             Loader = new SceneLoader();
             Assets = new Assetmanager();
+            Events = new EventManager();
         }
 
-        private int scoreGained;
-        private int healthLost;
-        private int candiesEaten;
-        public void PublishGainedScore(int amount) => scoreGained += amount;
-        public void PublishLoseHealth(int amount) => healthLost += amount;
-        public void PublishCandyEaten() => candiesEaten++;
+       
 
         public void Spawn(Entity entity)
         {
@@ -65,28 +57,18 @@ namespace Pacman
 
             }
 
-            if (scoreGained != 0)
-            {
-                GainScore?.Invoke(this,scoreGained);
-                scoreGained = 0;
-            }
-
-            if (healthLost != 0)
-            {
-                LoseHealth?.Invoke(this,healthLost);
-                healthLost = 0;
-            }
-            if (candiesEaten != 0)
-            {
-                CandyEaten?.Invoke();
-                candiesEaten = 0;
-            }
+           Events.HandleEvents(this);
+           
             for (int i = 0; i < entities.Count;)
             {
                 Entity entity = entities[i];
                 if (entity.Dead) entities.RemoveAt(i);
                 else i++;
             }
+            
+           Events.HandleLateEvents(this);
+
+            
         }
 
         public void RenderAll(RenderTarget target)

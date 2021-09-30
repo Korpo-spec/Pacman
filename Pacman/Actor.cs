@@ -65,12 +65,13 @@ namespace Pacman
         {
             Vector2f at = Position + new Vector2f(9, 9);
             at += 18 * ToVector(dir);
-            FloatRect rect = new FloatRect(at.X, at.Y, 1, 1);
+            FloatRect rect = new FloatRect(at.X, at.Y, 5, 5);
             return !scene.FindIntersects(rect).Any(e => e.Solid);
         }
 
         protected static Vector2f ToVector(int dir)
         {
+            Console.WriteLine(dir);
             switch (dir)
             {
                 case 0:

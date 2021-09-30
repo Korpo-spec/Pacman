@@ -31,6 +31,7 @@ namespace Pacman
         public virtual void Create(Scene scene)
         {
             sprite.Texture = scene.Assets.LoadTexture(textureName);
+            
         }
 
         public virtual void Destroy(Scene scene)

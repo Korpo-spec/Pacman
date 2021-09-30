@@ -19,7 +19,7 @@ namespace Pacman
             if (other is Pacman)
             {
                 Dead = true;
-                scene.PublishGainedScore(100);
+                scene.Events.PublishGainedScore(100);
 
             }
             

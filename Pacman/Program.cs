@@ -24,7 +24,8 @@ namespace Pacman
                     window.DispatchEvents();
 
                     float deltaTime = clock.Restart().AsSeconds();
-                    if (deltaTime > 0.1f) deltaTime = 0.1f;                    
+                    if (deltaTime > 0.1f) deltaTime = 0.09f;
+                    
                     scene.UpdateAll(deltaTime);
                     
                     window.Clear(new Color(223, 246, 245));

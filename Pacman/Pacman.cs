@@ -8,19 +8,60 @@ namespace Pacman
         public override void Create(Scene scene)
         {
             speed = 100f;
-            sprite.TextureRect = new IntRect(0,0,18,18);
             originalPosition = Position;
-
+    
             base.Create(scene);
-            scene.LoseHealth += OnLoseHealth;
+            sprite.TextureRect = new IntRect(0,0,18,18);
+
+            scene.Events.LoseHealth += OnLoseHealth;
             
+        }
+
+        private float timer = 0;
+        private bool firstFrame;
+
+        public override void Update(Scene scene, float deltaTime)
+        {
+            timer += deltaTime;
+            if (timer > 1 / 10f)
+            {
+                firstFrame = !firstFrame;
+                timer = 0;
+            }
+            base.Update(scene, deltaTime);
+            
+        }
+        
+        public override void Render(RenderTarget target)
+        {
+            switch (direction)
+            {
+                case 0: 
+                    sprite.TextureRect = new IntRect(firstFrame?0:18,0,18,18);
+                    break;
+                case 1:
+                    sprite.TextureRect = new IntRect(firstFrame?0:18,18,18,18);
+                    break;
+                case 2:
+                    sprite.TextureRect = new IntRect(firstFrame?0:18,36,18,18);
+                    break;
+                case 3:
+                    sprite.TextureRect = new IntRect(firstFrame?0:18,54,18,18);
+                    break;
+
+
+
+
+
+            }
+            base.Render(target);
         }
 
         public override void Destroy(Scene scene)
         {
             
             base.Destroy(scene);
-            scene.LoseHealth -= OnLoseHealth;
+            scene.Events.LoseHealth -= OnLoseHealth;
         }
 
         private void OnLoseHealth(Scene scene, int amount)
