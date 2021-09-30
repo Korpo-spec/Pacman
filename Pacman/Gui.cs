@@ -1,6 +1,7 @@
 ﻿using System;
 using SFML.Graphics;
 using SFML.System;
+using System.IO;
 
 namespace Pacman
 
@@ -8,10 +9,11 @@ namespace Pacman
     public class Gui : Entity
     {
         private Text scoreText;
-        private int maxHealth = 4;
+        private int maxHealth = 1;
         private int currentHealth;
         private int currentScore;
-
+        private int highScore;
+        
         public Gui() : base("pacman")
         {
             scoreText = new Text();
@@ -26,6 +28,12 @@ namespace Pacman
             scene.Events.LoseHealth += OnLoseHealth;
             scene.Events.GainScore += OnGainScore;
             base.Create(scene);
+        }
+
+        public override void Destroy(Scene scene)
+        {
+            scene.Events.LoseHealth -= OnLoseHealth;
+            scene.Events.GainScore -= OnGainScore;
         }
 
         public override void Render(RenderTarget target)
@@ -51,7 +59,16 @@ namespace Pacman
             if (currentHealth <= 0)
             {
                 DontDestroyOnLoad = false;
-                scene.Loader.Reload();
+                highScore = int.Parse(File.ReadAllText("highscore.txt"));
+                if (highScore < currentScore)
+                {
+                    highScore = currentScore;
+                    currentScore = 0;
+                    File.WriteAllText("highScore.txt", highScore.ToString()); 
+                }
+                scene.Loader.Load("score");
+                
+                
             }
         }
 

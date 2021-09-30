@@ -19,7 +19,9 @@ namespace Pacman
                 {'g', () => new Ghost()},
                 {'p', () => new Pacman()},
                 {'.', () => new Coin()},
-                {'c', () => new Candy()}
+                {'c', () => new Candy()},
+                {'t', () => new ScoreScreen()}
+                
                 
             };
         }
