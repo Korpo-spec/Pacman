@@ -71,7 +71,7 @@ namespace Pacman
 
         protected static Vector2f ToVector(int dir)
         {
-            Console.WriteLine(dir);
+            
             switch (dir)
             {
                 case 0:

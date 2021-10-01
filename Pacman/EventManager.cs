@@ -30,16 +30,17 @@
                 CandyEaten?.Invoke();
                 candiesEaten = 0;
             }
-            
-        }
-
-        public void HandleLateEvents(Scene scene)
-        {
             if (scoreGained != 0)
             {
                 GainScore?.Invoke(scene, scoreGained);
                 scoreGained = 0;
             }
+            
+        }
+
+        public void HandleLateEvents(Scene scene)
+        {
+            
         }
     }
 }

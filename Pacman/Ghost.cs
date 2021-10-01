@@ -12,10 +12,11 @@ namespace Pacman
             direction = -1;
             speed = 100.0f;
             moving = true;
-            scene.Events.CandyEaten += () => frozenTimer = 200;
+            scene.Events.CandyEaten += () => frozenTimer = 50;
             base.Create(scene);
             sprite.TextureRect = new IntRect(36, 0, 18, 18);
             originalPosition = Position;
+            
         }
 
         protected override void CollideWith(Scene scene, Entity other)
@@ -26,6 +27,10 @@ namespace Pacman
                 {
                     scene.Events.PublishLoseHealth(1);
                     
+                }
+                else
+                {
+                    scene.Events.PublishGainedScore(200);
                 }
                 Position = originalPosition;
             }

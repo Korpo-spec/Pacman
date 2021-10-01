@@ -31,7 +31,20 @@ namespace Pacman
             base.Update(scene, deltaTime);
             
         }
-        
+
+        public override FloatRect Bounds
+        {
+            get
+            {
+                var bounds = base.Bounds;
+                bounds.Left += 3;
+                bounds.Width -= 6;
+                bounds.Top += 3;
+                bounds.Height -= 6;
+                return bounds;
+            }
+        }
+
         public override void Render(RenderTarget target)
         {
             switch (direction)

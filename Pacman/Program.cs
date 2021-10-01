@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using SFML.System;
 using SFML.Graphics;
 using SFML.Window;
@@ -14,7 +15,9 @@ namespace Pacman
             using (var window = new RenderWindow(new VideoMode(828, 900), "Pacman")) 
             {
                 window.Closed += (o, e) => window.Close();
-                File.Open("highscore.txt", FileMode.OpenOrCreate);
+                FileStream file = File.Open("highscore.txt", FileMode.OpenOrCreate);
+                
+                    file.Close();
                 Scene scene = new Scene();
                 scene.Loader.Load("maze");
                 Clock clock = new Clock();
@@ -25,7 +28,7 @@ namespace Pacman
                     window.DispatchEvents();
 
                     float deltaTime = clock.Restart().AsSeconds();
-                    if (deltaTime > 0.1f) deltaTime = 0.09f;
+                    if (deltaTime > 0.05f) deltaTime = 0.05f;
                     
                     scene.UpdateAll(deltaTime);
                     

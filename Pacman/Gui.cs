@@ -59,7 +59,8 @@ namespace Pacman
             if (currentHealth <= 0)
             {
                 DontDestroyOnLoad = false;
-                highScore = int.Parse(File.ReadAllText("highscore.txt"));
+                bool parsed = int.TryParse(File.ReadAllText("highscore.txt"),out highScore);
+                if (!parsed) highScore = 0;
                 if (highScore < currentScore)
                 {
                     highScore = currentScore;

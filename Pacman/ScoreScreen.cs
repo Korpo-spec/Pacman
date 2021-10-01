@@ -31,11 +31,18 @@ namespace Pacman
 
         public override void Render(RenderTarget target)
         {
-            string fileString = File.ReadAllText("highscore.txt");
-            scoreText.DisplayedString = $"highscore: {fileString}";
-            scoreText.Position = new Vector2f(scoreText.GetGlobalBounds().Width/4, scoreText.GetGlobalBounds().Height/2);
+            scoreText.CharacterSize = 36;
 
+            string fileString = File.ReadAllText("highscore.txt");
+            scoreText.DisplayedString = $"Highscore: {fileString}";
+            scoreText.Position = new Vector2f(828/2  - scoreText.GetGlobalBounds().Width, scoreText.GetGlobalBounds().Height/2+100);
             target.Draw(scoreText);
+            scoreText.DisplayedString = "Press space to play again!";
+            scoreText.CharacterSize = 20;
+            scoreText.Position = new Vector2f(828/2 - scoreText.GetLocalBounds().Width-(50/2), scoreText.GetGlobalBounds().Height/2+200);
+            
+            target.Draw(scoreText);
+
         }
     }
 }

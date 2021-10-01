@@ -63,7 +63,10 @@ namespace Pacman
             
             currentScene = nextScene;
             nextScene = "";
-            if(!scene.FindByType<Gui>(out _)) scene.Spawn(new Gui());
+            if (!scene.FindByType<ScoreScreen>(out _))
+            {
+                if(!scene.FindByType<Gui>(out _)) scene.Spawn(new Gui());
+            }
             
         }
 
