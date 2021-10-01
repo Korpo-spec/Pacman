@@ -12,7 +12,7 @@ namespace Pacman
             direction = -1;
             speed = 100.0f;
             moving = true;
-            scene.Events.CandyEaten += () => frozenTimer = 50;
+            scene.Events.CandyEaten += () => frozenTimer = 5;
             base.Create(scene);
             sprite.TextureRect = new IntRect(36, 0, 18, 18);
             originalPosition = Position;

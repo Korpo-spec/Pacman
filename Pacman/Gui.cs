@@ -9,7 +9,7 @@ namespace Pacman
     public class Gui : Entity
     {
         private Text scoreText;
-        private int maxHealth = 1;
+        private int maxHealth = 5;
         private int currentHealth;
         private int currentScore;
         private int highScore;
