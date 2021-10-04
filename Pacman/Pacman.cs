@@ -1,6 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using static SFML.Window.Keyboard.Key;
+
 namespace Pacman
 {
     public class Pacman : Actor
@@ -9,12 +10,11 @@ namespace Pacman
         {
             speed = 100f;
             originalPosition = Position;
-    
+
             base.Create(scene);
-            sprite.TextureRect = new IntRect(0,0,18,18);
+            sprite.TextureRect = new IntRect(0, 0, 18, 18);
 
             scene.Events.LoseHealth += OnLoseHealth;
-            
         }
 
         private float timer = 0;
@@ -28,8 +28,8 @@ namespace Pacman
                 firstFrame = !firstFrame;
                 timer = 0;
             }
+
             base.Update(scene, deltaTime);
-            
         }
 
         public override FloatRect Bounds
@@ -49,37 +49,32 @@ namespace Pacman
         {
             switch (direction)
             {
-                case 0: 
-                    sprite.TextureRect = new IntRect(firstFrame?0:18,0,18,18);
+                case 0:
+                    sprite.TextureRect = new IntRect(firstFrame ? 0 : 18, 0, 18, 18);
                     break;
                 case 1:
-                    sprite.TextureRect = new IntRect(firstFrame?0:18,18,18,18);
+                    sprite.TextureRect = new IntRect(firstFrame ? 0 : 18, 18, 18, 18);
                     break;
                 case 2:
-                    sprite.TextureRect = new IntRect(firstFrame?0:18,36,18,18);
+                    sprite.TextureRect = new IntRect(firstFrame ? 0 : 18, 36, 18, 18);
                     break;
                 case 3:
-                    sprite.TextureRect = new IntRect(firstFrame?0:18,54,18,18);
+                    sprite.TextureRect = new IntRect(firstFrame ? 0 : 18, 54, 18, 18);
                     break;
-
-
-
-
-
             }
+
             base.Render(target);
         }
 
         public override void Destroy(Scene scene)
         {
-            
             base.Destroy(scene);
             scene.Events.LoseHealth -= OnLoseHealth;
         }
 
         private void OnLoseHealth(Scene scene, int amount)
         {
-            Position = originalPosition;
+            Reset();
         }
 
         protected override int PickDirection(Scene scene)

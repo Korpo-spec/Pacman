@@ -17,7 +17,7 @@ namespace Pacman
                 window.Closed += (o, e) => window.Close();
                 FileStream file = File.Open("highscore.txt", FileMode.OpenOrCreate);
                 
-                    file.Close();
+                file.Close();
                 Scene scene = new Scene();
                 scene.Loader.Load("maze");
                 Clock clock = new Clock();
@@ -28,7 +28,7 @@ namespace Pacman
                     window.DispatchEvents();
 
                     float deltaTime = clock.Restart().AsSeconds();
-                    if (deltaTime > 0.05f) deltaTime = 0.05f;
+                    if (deltaTime > 0.01f) deltaTime = 0.01f;
                     
                     scene.UpdateAll(deltaTime);
                     

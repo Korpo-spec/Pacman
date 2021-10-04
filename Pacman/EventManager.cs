@@ -38,9 +38,5 @@
             
         }
 
-        public void HandleLateEvents(Scene scene)
-        {
-            
-        }
     }
 }

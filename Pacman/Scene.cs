@@ -8,12 +8,11 @@ namespace Pacman
     
     public sealed class Scene
     {
-      
-        
         private List<Entity> entities;
         public readonly SceneLoader Loader;
         public readonly Assetmanager Assets;
         public readonly EventManager Events;
+
         public Scene()
         {
             entities = new List<Entity>();
@@ -21,8 +20,6 @@ namespace Pacman
             Assets = new Assetmanager();
             Events = new EventManager();
         }
-
-       
 
         public void Spawn(Entity entity)
         {
@@ -40,46 +37,38 @@ namespace Pacman
                     entities.RemoveAt(i);
                     entity.Destroy(this);
                 }
-                
             }
         }
 
         public void UpdateAll(float deltaTime)
         {
-            
-            
             Loader.HandleSceneLoad(this);
 
             for (int i = entities.Count - 1; i >= 0; i--)
             {
                 Entity entity = entities[i];
                 entity.Update(this, deltaTime);
-
             }
 
-           Events.HandleEvents(this);
-           
+            Events.HandleEvents(this);
+
             for (int i = 0; i < entities.Count;)
             {
                 Entity entity = entities[i];
-                if (entity.Dead) entities.RemoveAt(i);
-                else i++;
+                if (entity.Dead)
+                    entities.RemoveAt(i);
+                else
+                    i++;
             }
-            
-           Events.HandleLateEvents(this);
-
-            
         }
 
         public void RenderAll(RenderTarget target)
         {
             foreach (var entity in entities)
             {
-               entity.Render(target); 
+                entity.Render(target);
             }
         }
-
-       
 
         public IEnumerable<Entity> FindIntersects(FloatRect bounds)
         {
@@ -93,10 +82,9 @@ namespace Pacman
                 {
                     yield return entity;
                 }
-
             }
         }
-        
+
         public bool FindByType<T>(out T found) where T : Entity
         {
             foreach (Entity entity in entities)
@@ -107,7 +95,7 @@ namespace Pacman
                     return true;
                 }
             }
-            
+
             found = default(T);
             return false;
         }

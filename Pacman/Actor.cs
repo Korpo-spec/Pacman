@@ -57,6 +57,14 @@ namespace Pacman
             originalSpeed = speed;
         }
 
+        protected void Reset()
+        {
+            wasAligned = false;
+            Position = originalPosition;
+            speed = originalSpeed;
+            
+        }
+
         protected bool IsAlligned => 
             (int) MathF.Floor(Position.X) % 18 == 0 && 
             (int) MathF.Floor(Position.Y) % 18 == 0;

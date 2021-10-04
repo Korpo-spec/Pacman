@@ -31,8 +31,10 @@ namespace Pacman
                 else
                 {
                     scene.Events.PublishGainedScore(200);
+                    
                 }
-                Position = originalPosition;
+                Reset();
+                
             }
         }
 
@@ -56,6 +58,14 @@ namespace Pacman
         {
             base.Update(scene, deltaTime);
             frozenTimer = MathF.Max(frozenTimer - deltaTime, 0.0f);
+            if (frozenTimer <= 0)
+            {
+                speed = originalSpeed;
+            }
+            else
+            {
+                speed = 75.0f;
+            }
         }
 
         public override void Render(RenderTarget target)
