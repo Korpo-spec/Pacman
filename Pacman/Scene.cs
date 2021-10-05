@@ -21,13 +21,13 @@ namespace Pacman
             Events = new EventManager();
         }
 
-        public void Spawn(Entity entity)
+        public void Spawn(Entity entity)//Spawn and run create func
         {
             entities.Add(entity);
             entity.Create(this);
         }
 
-        public void Clear()
+        public void Clear() //Clear the whole entities list and play entities destroy function
         {
             for (int i = entities.Count - 1; i >= 0; i--)
             {
@@ -40,7 +40,7 @@ namespace Pacman
             }
         }
 
-        public void UpdateAll(float deltaTime)
+        public void UpdateAll(float deltaTime)//Updates, runs events and then removes entities
         {
             Loader.HandleSceneLoad(this);
 
@@ -62,7 +62,7 @@ namespace Pacman
             }
         }
 
-        public void RenderAll(RenderTarget target)
+        public void RenderAll(RenderTarget target)//Renders all entities
         {
             foreach (var entity in entities)
             {
@@ -70,7 +70,7 @@ namespace Pacman
             }
         }
 
-        public IEnumerable<Entity> FindIntersects(FloatRect bounds)
+        public IEnumerable<Entity> FindIntersects(FloatRect bounds)//Find all intersects between chosen bounds and all other entities
         {
             int lastEntity = entities.Count - 1;
 
@@ -85,7 +85,7 @@ namespace Pacman
             }
         }
 
-        public bool FindByType<T>(out T found) where T : Entity
+        public bool FindByType<T>(out T found) where T : Entity //Find an entitie by type where type is a type of Entity
         {
             foreach (Entity entity in entities)
             {
