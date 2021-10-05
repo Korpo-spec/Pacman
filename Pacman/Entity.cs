@@ -41,7 +41,7 @@ namespace Pacman
 
         public virtual void Update(Scene scene, float deltaTime)
         {
-            foreach (Entity found in scene.FindIntersects(Bounds))
+            foreach (Entity found in scene.FindIntersects(Bounds)) //Find collisions
             {
                 CollideWith(scene, found);
             }
