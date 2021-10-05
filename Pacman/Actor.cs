@@ -21,8 +21,8 @@ namespace Pacman
 
         public override void Update(Scene scene, float deltaTime)
         {
-            base.Update(scene, deltaTime);
-            if (IsAlligned)
+            base.Update(scene, deltaTime);//update collision
+            if (IsAlligned)//if actor is aligned to grid pick a new direction according to ovrridable PickDirection
             {
                 if (!wasAligned)
                 {
