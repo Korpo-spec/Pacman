@@ -51,8 +51,7 @@ namespace Pacman
                 char[] row = board[i].ToCharArray();
                 for (int j = 0; j < row.Length; j++)
                 {
-                    Entity created;
-                    if(!Create(row[j], out created)) continue;
+                    if(!Create(row[j], out var created)) continue;
                     created.Position = new Vector2f((j) * 18, (i) * 18);
                     scene.Spawn(created);
                     

@@ -70,11 +70,13 @@ namespace Pacman
         {
             base.Destroy(scene);
             scene.Events.LoseHealth -= OnLoseHealth;
+            
         }
 
         private void OnLoseHealth(Scene scene, int amount)
         {
             Reset();
+            moving = false;
         }
 
         protected override int PickDirection(Scene scene)
